@@ -61,8 +61,8 @@ class ChainedModel(BaseModel):
                 
                 logits = self.mdl(X)
                 loss = 0
-                for logit in logits:
-                    loss += criterion(logit, y)
+                for i, logit in enumerate(logits):
+                    loss += criterion(logit, y[:, i])
 
                 optimizer.zero_grad()
                 loss.backward()
